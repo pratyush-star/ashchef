@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AskChef</title>
+
+<style>
+:root {
+  --primary: #7b1e2b;
+  --accent: #c0392b;
+  --bg: #fdf8f6;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+}
+
+header {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  padding: 16px;
+  text-align: center;
+}
+
+.container {
+  padding: 16px;
+  max-width: 480px;
+  margin: auto;
+}
+
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  font-weight: 600;
+}
+
+.hidden { display: none; }
+
+.chef {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>👨‍🍳 AskChef</h2>
+  <p style="margin:0;font-size:12px;">Ask now, get in 15 mins</p>
+</header>
+
+<div class="container">
+
+<div id="signup" class="card">
+  <h3>Get Started</h3>
+  <input type="tel" id="mobile" placeholder="Enter mobile number">
+  <input type="text" id="location" placeholder="Enter your location">
+  <button onclick="signup()">Find Chefs</button>
+</div>
+
+<div id="chefs" class="hidden">
+  <h3>Nearby Chefs</h3>
+
+  <div class="card chef">
+    <div>
+      <strong>Chef Rahul</strong><br>
+      <small>North Indian</small>
+    </div>
+    <button onclick="selectChef('Rahul')">View</button>
+  </div>
+
+  <div class="card chef">
+    <div>
+      <strong>Chef Priya</strong><br>
+      <small>South Indian</small>
+    </div>
+    <button onclick="selectChef('Priya')">View</button>
+  </div>
+
+</div>
+
+<div id="menu" class="hidden">
+  <h3 id="chefTitle"></h3>
+
+  <div class="card menu-item">
+    <span>🍛 Butter Chicken</span>
+    <button onclick="startOrder('Butter Chicken')">Order</button>
+  </div>
+
+  <div class="card menu-item">
+    <span>🍕 Pizza</span>
+    <button onclick="startOrder('Pizza')">Order</button>
+  </div>
+
+</div>
+
+<div id="nameStep" class="hidden card">
+  <h3>Almost Done</h3>
+  <input type="text" id="username" placeholder="Enter your name">
+  <button onclick="confirmOrder()">Confirm Order</button>
+</div>
+
+<div id="confirmation" class="hidden card">
+  <h3>✅ Order Confirmed</h3>
+  <p id="orderText"></p>
+</div>
+
+</div>
+
+<script>
+let selectedChef = "";
+let selectedFood = "";
+
+function signup() {
+  const mobile = document.getElementById("mobile").value;
+  const location = document.getElementById("location").value;
+
+  if (!mobile || !location) {
+    alert("Please enter mobile & location");
+    return;
+  }
+
+  show("chefs");
+}
+
+function selectChef(name) {
+  selectedChef = name;
+  document.getElementById("chefTitle").innerText = "Menu by Chef " + name;
+  show("menu");
+}
+
+function startOrder(food) {
+  selectedFood = food;
+  show("nameStep");
+}
+
+function confirmOrder() {
+  const name = document.getElementById("username").value;
+
+  if (!name) {
+    alert("Please enter your name");
+    return;
+  }
+
+  document.getElementById("orderText").innerText =
+    selectedFood + " is being prepared by Chef " + selectedChef +
+    ". Pickup in 15 mins 🚀";
+
+  show("confirmation");
+}
+
+function show(section) {
+  ["signup","chefs","menu","nameStep","confirmation"].forEach(id => {
+    document.getElementById(id).classList.add("hidden");
+  });
+
+  document.getElementById(section).classList.remove("hidden");
+}
+</script>
+
+</body>
+</html>
