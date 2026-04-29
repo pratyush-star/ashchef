@@ -7,148 +7,507 @@
 
 <style>
 :root {
-  --primary: #7b1e2b;
-  --accent: #c0392b;
-  --bg: #fdf8f6;
+  --primary: #8f2635;
+  --primary-dark: #5b1521;
+  --accent: #e16f3d;
+  --ink: #241716;
+  --muted: #756664;
+  --line: #eadbd5;
+  --surface: #fffaf7;
+  --card: #ffffff;
+  --success: #19765b;
+  --shadow: 0 18px 45px rgba(91, 21, 33, 0.16);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: var(--bg);
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(225, 111, 61, 0.18), transparent 32rem),
+    linear-gradient(180deg, #fff7f1 0%, #fbede8 48%, #f8f4ef 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(100%, 520px);
+  min-height: 100vh;
+  margin: 0 auto;
+  background: rgba(255, 250, 247, 0.78);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.6), 0 24px 80px rgba(91,21,33,0.14);
 }
 
 header {
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  position: relative;
+  overflow: hidden;
   color: white;
-  padding: 16px;
-  text-align: center;
+  padding: 26px 22px 28px;
+  background:
+    linear-gradient(135deg, rgba(91, 21, 33, 0.98), rgba(143, 38, 53, 0.94) 54%, rgba(225, 111, 61, 0.92)),
+    url("https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=1200&q=80") center/cover;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent, rgba(36, 23, 22, 0.2));
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.logo {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28);
+}
+
+.status-pill {
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.24);
+}
+
+h1 {
+  margin: 0;
+  max-width: 11ch;
+  font-size: clamp(34px, 9vw, 48px);
+  line-height: 0.98;
+}
+
+.subtitle {
+  max-width: 30ch;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.84);
+  font-size: 15px;
+  line-height: 1.45;
 }
 
 .container {
-  padding: 16px;
-  max-width: 480px;
-  margin: auto;
+  padding: 18px;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 6px 2px 14px;
+}
+
+h2,
+h3 {
+  margin: 0;
+}
+
+h2 {
+  font-size: 22px;
+}
+
+.hint,
+small {
+  color: var(--muted);
+}
+
+.hint {
+  margin: 7px 0 0;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .card {
-  background: white;
-  border-radius: 14px;
-  padding: 16px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(234, 219, 213, 0.92);
+  border-radius: 8px;
+  padding: 18px;
   margin-bottom: 14px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.field {
+  margin-top: 14px;
+}
+
+label {
+  display: block;
+  margin-bottom: 7px;
+  color: #4d3935;
+  font-size: 13px;
+  font-weight: 700;
 }
 
 input {
   width: 100%;
-  padding: 12px;
-  margin-top: 10px;
+  min-height: 48px;
+  padding: 12px 14px;
   border-radius: 8px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: #fffdfb;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+input::placeholder {
+  color: #a79691;
+}
+
+input:focus {
+  border-color: rgba(143, 38, 53, 0.7);
+  background: white;
+  box-shadow: 0 0 0 4px rgba(143, 38, 53, 0.1);
 }
 
 button {
-  width: 100%;
-  padding: 12px;
-  margin-top: 12px;
-  border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
-  color: white;
-  font-weight: 600;
-}
-
-.hidden { display: none; }
-
-.chef {
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  font-weight: 800;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary) 58%, var(--accent));
+  box-shadow: 0 12px 24px rgba(143, 38, 53, 0.24);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
 }
 
+button:hover {
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(143, 38, 53, 0.27);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.primary-action {
+  width: 100%;
+  margin-top: 18px;
+}
+
+.mini-button {
+  flex: 0 0 auto;
+  width: auto;
+  min-height: 38px;
+  padding: 9px 13px;
+  font-size: 13px;
+}
+
+.hidden {
+  display: none;
+}
+
+.chef,
 .menu-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.avatar,
+.food-icon {
+  display: grid;
+  flex: 0 0 auto;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border-radius: 8px;
+  background: #fff1e8;
+  color: var(--primary);
+  font-size: 24px;
+}
+
+.chef-info,
+.menu-info {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 12px;
+}
+
+.chef-meta,
+.menu-meta {
+  min-width: 0;
+}
+
+.chef-name,
+.food-name {
+  display: block;
+  overflow: hidden;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rating-row,
+.price-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #fff3ed;
+  color: #7c4037;
+  font-weight: 700;
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin: -4px 0 18px;
+}
+
+.step {
+  height: 5px;
+  border-radius: 999px;
+  background: #eadbd5;
+}
+
+.step.is-active {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+.confirmation-card {
+  text-align: center;
+  padding: 28px 22px;
+}
+
+.checkmark {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 14px;
+  place-items: center;
+  border-radius: 50%;
+  color: white;
+  background: var(--success);
+  box-shadow: 0 14px 30px rgba(25, 118, 91, 0.22);
+  font-size: 28px;
+}
+
+#orderText {
+  margin: 10px auto 0;
+  max-width: 30ch;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 420px) {
+  .container {
+    padding: 14px;
+  }
+
+  header {
+    padding: 22px 18px 24px;
+  }
+
+  .chef,
+  .menu-item {
+    align-items: stretch;
+  }
+
+  .mini-button {
+    align-self: center;
+  }
 }
 </style>
 </head>
 
 <body>
-
-<header>
-  <h2>👨‍🍳 AskChef</h2>
-  <p style="margin:0;font-size:12px;">Ask now, get in 15 mins</p>
-</header>
-
-<div class="container">
-
-<div id="signup" class="card">
-  <h3>Get Started</h3>
-  <input type="tel" id="mobile" placeholder="Enter mobile number">
-  <input type="text" id="location" placeholder="Enter your location">
-  <button onclick="signup()">Find Chefs</button>
-</div>
-
-<div id="chefs" class="hidden">
-  <h3>Nearby Chefs</h3>
-
-  <div class="card chef">
-    <div>
-      <strong>Chef Rahul</strong><br>
-      <small>North Indian</small>
+<main class="app-shell">
+  <header>
+    <div class="hero-content">
+      <div class="brand-row">
+        <div class="brand">
+          <span class="logo" aria-hidden="true">&#127859;</span>
+          <span>AskChef</span>
+        </div>
+        <span class="status-pill">15 min pickup</span>
+      </div>
+      <h1>Fresh food nearby.</h1>
+      <p class="subtitle">Choose a local chef, order a favorite, and pick it up hot in minutes.</p>
     </div>
-    <button onclick="selectChef('Rahul')">View</button>
-  </div>
+  </header>
 
-  <div class="card chef">
-    <div>
-      <strong>Chef Priya</strong><br>
-      <small>South Indian</small>
+  <div class="container">
+    <div class="stepper" aria-hidden="true">
+      <span id="step1" class="step is-active"></span>
+      <span id="step2" class="step"></span>
+      <span id="step3" class="step"></span>
     </div>
-    <button onclick="selectChef('Priya')">View</button>
+
+    <section id="signup" class="card">
+      <h2>Get started</h2>
+      <p class="hint">Tell us where to look, and we will show cooks ready around you.</p>
+
+      <div class="field">
+        <label for="mobile">Mobile number</label>
+        <input type="tel" id="mobile" placeholder="98765 43210" inputmode="tel" autocomplete="tel">
+      </div>
+
+      <div class="field">
+        <label for="location">Location</label>
+        <input type="text" id="location" placeholder="Area, street, or landmark" autocomplete="street-address">
+      </div>
+
+      <button class="primary-action" onclick="signup()">Find chefs &rarr;</button>
+    </section>
+
+    <section id="chefs" class="hidden">
+      <div class="section-heading">
+        <div>
+          <h2>Nearby chefs</h2>
+          <p class="hint">Available now near your location.</p>
+        </div>
+      </div>
+
+      <div class="card chef">
+        <div class="chef-info">
+          <span class="avatar" aria-hidden="true">&#128104;&#8205;&#127859;</span>
+          <div class="chef-meta">
+            <span class="chef-name">Chef Rahul</span>
+            <div class="rating-row">
+              <span>North Indian</span>
+              <span class="tag">4.8 &#9733;</span>
+            </div>
+          </div>
+        </div>
+        <button class="mini-button" onclick="selectChef('Rahul')">View</button>
+      </div>
+
+      <div class="card chef">
+        <div class="chef-info">
+          <span class="avatar" aria-hidden="true">&#128105;&#8205;&#127859;</span>
+          <div class="chef-meta">
+            <span class="chef-name">Chef Priya</span>
+            <div class="rating-row">
+              <span>South Indian</span>
+              <span class="tag">4.9 &#9733;</span>
+            </div>
+          </div>
+        </div>
+        <button class="mini-button" onclick="selectChef('Priya')">View</button>
+      </div>
+    </section>
+
+    <section id="menu" class="hidden">
+      <div class="section-heading">
+        <div>
+          <h2 id="chefTitle"></h2>
+          <p class="hint">Freshly cooked and ready for quick pickup.</p>
+        </div>
+      </div>
+
+      <div class="card menu-item">
+        <div class="menu-info">
+          <span class="food-icon" aria-hidden="true">&#127835;</span>
+          <div class="menu-meta">
+            <span class="food-name">Butter Chicken</span>
+            <div class="price-row">
+              <span>Rich gravy</span>
+              <span class="tag">&#8377;220</span>
+            </div>
+          </div>
+        </div>
+        <button class="mini-button" onclick="startOrder('Butter Chicken')">Order</button>
+      </div>
+
+      <div class="card menu-item">
+        <div class="menu-info">
+          <span class="food-icon" aria-hidden="true">&#127829;</span>
+          <div class="menu-meta">
+            <span class="food-name">Pizza</span>
+            <div class="price-row">
+              <span>Cheese loaded</span>
+              <span class="tag">&#8377;180</span>
+            </div>
+          </div>
+        </div>
+        <button class="mini-button" onclick="startOrder('Pizza')">Order</button>
+      </div>
+    </section>
+
+    <section id="nameStep" class="hidden card">
+      <h2>Almost done</h2>
+      <p class="hint">Add your name so the chef can label your order.</p>
+      <div class="field">
+        <label for="username">Your name</label>
+        <input type="text" id="username" placeholder="Enter your name" autocomplete="name">
+      </div>
+      <button class="primary-action" onclick="confirmOrder()">Confirm order</button>
+    </section>
+
+    <section id="confirmation" class="hidden card confirmation-card">
+      <span class="checkmark" aria-hidden="true">&#10003;</span>
+      <h2>Order confirmed</h2>
+      <p id="orderText"></p>
+    </section>
   </div>
-
-</div>
-
-<div id="menu" class="hidden">
-  <h3 id="chefTitle"></h3>
-
-  <div class="card menu-item">
-    <span>🍛 Butter Chicken</span>
-    <button onclick="startOrder('Butter Paneer')">Order</button>
-  </div>
-
-  <div class="card menu-item">
-    <span>🍕 Pizza</span>
-    <button onclick="startOrder('Pizza')">Order</button>
-  </div>
-
-</div>
-
-<div id="nameStep" class="hidden card">
-  <h3>Almost Done</h3>
-  <input type="text" id="username" placeholder="Enter your name">
-  <button onclick="confirmOrder()">Confirm Order</button>
-</div>
-
-<div id="confirmation" class="hidden card">
-  <h3>✅ Order Confirmed</h3>
-  <p id="orderText"></p>
-</div>
-
-</div>
+</main>
 
 <script>
 let selectedChef = "";
 let selectedFood = "";
 
 function signup() {
-  const mobile = document.getElementById("mobile").value;
-  const location = document.getElementById("location").value;
+  const mobile = document.getElementById("mobile").value.trim();
+  const location = document.getElementById("location").value.trim();
 
   if (!mobile || !location) {
-    alert("Please enter mobile & location");
+    alert("Please enter your mobile number and location.");
     return;
   }
 
@@ -167,16 +526,16 @@ function startOrder(food) {
 }
 
 function confirmOrder() {
-  const name = document.getElementById("username").value;
+  const name = document.getElementById("username").value.trim();
 
   if (!name) {
-    alert("Please enter your name");
+    alert("Please enter your name.");
     return;
   }
 
   document.getElementById("orderText").innerText =
-    selectedFood + " is being prepared by Chef " + selectedChef +
-    ". Pickup in 15 mins 🚀";
+    "Thanks, " + name + ". " + selectedFood + " is being prepared by Chef " +
+    selectedChef + ". Pickup in 15 minutes.";
 
   show("confirmation");
 }
@@ -187,8 +546,22 @@ function show(section) {
   });
 
   document.getElementById(section).classList.remove("hidden");
+  updateSteps(section);
+}
+
+function updateSteps(section) {
+  const activeCount = {
+    signup: 1,
+    chefs: 1,
+    menu: 2,
+    nameStep: 3,
+    confirmation: 3
+  }[section];
+
+  ["step1","step2","step3"].forEach((id, index) => {
+    document.getElementById(id).classList.toggle("is-active", index < activeCount);
+  });
 }
 </script>
-
 </body>
 </html>
